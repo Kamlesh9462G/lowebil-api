@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const bcrypt = require('bcryptjs')
+const bcrypt = require("bcryptjs");
 const userSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   firstName: {
@@ -41,6 +41,20 @@ const userSchema = mongoose.Schema({
     id: String,
     email: { type: String, required: false },
   },
+  isBlocked: {
+    type: Boolean,
+    default: false,
+  },
+  isDeleted: {
+    type: Boolean,
+    default: false,
+  },
+  isVerified: {
+    type: Boolean,
+    default: false,
+  },
+  followers: [{ type: mongoose.Schema.Types.ObjectId }],
+  following: [{ type: mongoose.Schema.Types.ObjectId }],
 });
 userSchema.pre("save", async function (next) {
   try {
