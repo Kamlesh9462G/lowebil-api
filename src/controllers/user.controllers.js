@@ -79,12 +79,14 @@ module.exports.signIn = async (req, res, next) => {
  *==============================================*
  */
 module.exports.googleOAuth = async (req, res, next) => {
+  //console.log(req.user)
   // Generate token
   const token = generateToken(req.user);
   res.status(200).json({
     token: token,
     id: req.user._id,
     method: req.user.method,
+    statusCode:httpStatus.OK
   });
 };
 /**
